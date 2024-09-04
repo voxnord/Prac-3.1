@@ -84,8 +84,6 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    
-
     int arr[] = { 7,9,6,5 };
     int n = sizeof(arr) / sizeof(arr[0]);
     int search_num = 5;
@@ -95,7 +93,7 @@ int main()
     cout << "Сумма всех элементов массива: " << num1.n1_2(arr, n) << endl;
     cout << "Число " << "не содержится в массиве " << "содержится в массиве " << num1.n1_3(arr, n, search_num) << endl;
 
-    string str[]
+    string str1[]
     {
         "5",
         "apple",
@@ -104,9 +102,11 @@ int main()
         "date",
         "elderberry"
     };
-    int nstr = sizeof(str) / sizeof(str[0]);
+    int nstr = sizeof(str1) / sizeof(str1[0]);
 
-    cout << "Второе по длине(лексикографически) слово: " << n3_1(str, nstr) << endl;
+    string str2 = "A man, a plan, a canal, Panama";
+
+    cout << "Второе по длине(лексикографически) слово: " << n3_1(str1, nstr) << endl;
 
     return 0;
 }
