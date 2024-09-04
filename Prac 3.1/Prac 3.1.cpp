@@ -74,6 +74,10 @@ string n3_1(string str[], int n)
 }
 
 
+void n3_2()
+{
+
+}
 
 int main()
 {
