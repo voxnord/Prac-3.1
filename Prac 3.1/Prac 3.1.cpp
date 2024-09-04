@@ -48,7 +48,25 @@ struct n1
 
 void n2()
 {
+    int digitals[]{1,2,5,7,5,4,4,3,5,6};
 
+    for (int i = 0; i < 10; i++) 
+    {
+        cin >> digitals[i]; // "читаем" элементы в массив
+    }
+
+    for (int i = 0; i < 10; i++) 
+    {
+        for (int j = 0; j < 9; j++) 
+        {
+            if (digitals[j] > digitals[j + 1]) 
+            {
+                int b = digitals[j]; // создали дополнительную переменную
+                digitals[j] = digitals[j + 1]; // меняем местами
+                digitals[j + 1] = b; // значения элементов
+            }
+        }
+    }
 }
 
 string n3_1(string str[], int n)
