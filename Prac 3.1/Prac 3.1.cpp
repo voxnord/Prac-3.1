@@ -2,15 +2,19 @@
 #include <string>
 #include <Windows.h>
 
+
 using namespace std;
 
-struct n1
+class n1
 {
+private:
+    int i = 0;
+public:
     int n1_1(int arr[], int n)
     {
         int Max = 0;
 
-        for (int i = 0; i < n; i++)
+        for (i; i < n; i++)
         {
             Max = max(Max, arr[i + 1]);
         }
@@ -22,7 +26,7 @@ struct n1
     {
         int sum = 0;
 
-        for (int i = 0; i < n; i++)
+        for (i; i < n; i++)
         {
             sum += arr[i];
         }
@@ -32,7 +36,7 @@ struct n1
 
     bool n1_3(int arr[], int n, int search_num)
     {
-        for (int i = 0; i < n; i++)
+        for (i; i < n; i++)
         {
             if (arr[i] == search_num)
             {
@@ -46,27 +50,51 @@ struct n1
     }
 };
 
-void n2()
+void num2()
 {
-    int digitals[]{1,2,5,7,5,4,4,3,5,6};
+    int arr[] = { 1,4,5,6,8,7,6,5,9,4,10,12,14,27 };
+    int n = sizeof(arr) / sizeof(arr[0]);
 
-    for (int i = 0; i < 10; i++) 
+    for (int i = 0; i < n; i++) 
     {
-        cin >> digitals[i]; // "читаем" элементы в массив
-    }
-
-    for (int i = 0; i < 10; i++) 
-    {
-        for (int j = 0; j < 9; j++) 
+        for (int j = 0; j < n-1; j++) 
         {
-            if (digitals[j] > digitals[j + 1]) 
+            if (arr[j] > arr[j + 1]) 
             {
-                int b = digitals[j]; // создали дополнительную переменную
-                digitals[j] = digitals[j + 1]; // меняем местами
-                digitals[j + 1] = b; // значения элементов
+                int b = arr[j]; // создали дополнительную переменную
+                arr[j] = arr[j + 1]; // меняем местами
+                arr[j + 1] = b; // значения элементов
             }
         }
     }
+
+    for (int num : arr)
+    {
+        cout << num << ' ';
+    }
+    cout << endl;
+
+    for (int i = 0; i < n - 1; i++)
+    {
+        int min_index = i;
+        for (int j = i + 1; j < n; j++)
+        {
+            if (arr[j] < arr[min_index])
+            {
+                min_index = j;
+            }
+        }
+        if (min_index != i)
+        {
+            swap(arr[i], arr[min_index]);
+        }
+    }
+
+    for (int num : arr)
+    {
+        cout << num << ' ';
+    }
+    cout << endl;
 }
 
 string n3_1(string str[], int n)
@@ -85,7 +113,6 @@ string n3_1(string str[], int n)
         {
             secondMax = str[i];
         }
-        
     }
 
     return secondMax;
@@ -110,6 +137,8 @@ int main()
     cout << "Максимальный элемент в массиве: " << num1.n1_1(arr, n) << endl;
     cout << "Сумма всех элементов массива: " << num1.n1_2(arr, n) << endl;
     cout << "Число " << "не содержится в массиве " << "содержится в массиве " << num1.n1_3(arr, n, search_num) << endl;
+
+    num2();
 
     string str1[]
     {
