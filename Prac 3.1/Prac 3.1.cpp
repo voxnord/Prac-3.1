@@ -1,7 +1,8 @@
 ﻿#include <iostream>
 #include <string>
+#include <vector>
 #include <Windows.h>
-
+#include <chrono>
 
 using namespace std;
 
@@ -50,16 +51,13 @@ public:
     }
 };
 
-void num2()
+double bubbleSort(vector<int> arr, int n)
 {
-    int arr[] = { 1,4,5,6,8,7,6,5,9,4,10,12,14,27 };
-    int n = sizeof(arr) / sizeof(arr[0]);
-
-    for (int i = 0; i < n; i++) 
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < n-1; j++) 
+        for (int j = 0; j < n - 1; j++)
         {
-            if (arr[j] > arr[j + 1]) 
+            if (arr[j] > arr[j + 1])
             {
                 int b = arr[j]; // создали дополнительную переменную
                 arr[j] = arr[j + 1]; // меняем местами
@@ -68,12 +66,18 @@ void num2()
         }
     }
 
-    for (int num : arr)
-    {
-        cout << num << ' ';
-    }
-    cout << endl;
+    auto start_time = std::chrono::steady_clock::now();
 
+    delete new int(1);
+
+    auto end_time = chrono::steady_clock::now();
+    auto elapsed_s = chrono::duration_cast<chrono::nanoseconds>(end_time - start_time);
+
+    return elapsed_s.count();
+}
+
+double choiceSort(vector<int> arr, int n)
+{
     for (int i = 0; i < n - 1; i++)
     {
         int min_index = i;
@@ -90,14 +94,17 @@ void num2()
         }
     }
 
-    for (int num : arr)
-    {
-        cout << num << ' ';
-    }
-    cout << endl;
+    auto start_time = std::chrono::steady_clock::now();
+
+    delete new int(1);
+
+    auto end_time = chrono::steady_clock::now();
+    auto elapsed_s = chrono::duration_cast<chrono::nanoseconds>(end_time - start_time);
+
+    return elapsed_s.count();
 }
 
-string n3_1(string str[], int n)
+string n3_1_1(string str[], int n)
 {
     string maxStr = "";
     string secondMax = "";
@@ -129,16 +136,29 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    int arr[] = { 7,9,6,5 };
-    int n = sizeof(arr) / sizeof(arr[0]);
+    int arr1[] = { 7,9,6,5 };
+    int n = sizeof(arr1) / sizeof(arr1[0]);
     int search_num = 5;
     n1 num1;
 
-    cout << "Максимальный элемент в массиве: " << num1.n1_1(arr, n) << endl;
-    cout << "Сумма всех элементов массива: " << num1.n1_2(arr, n) << endl;
-    cout << "Число " << "не содержится в массиве " << "содержится в массиве " << num1.n1_3(arr, n, search_num) << endl;
+    cout << "Максимальный элемент в массиве: " << num1.n1_1(arr1, n) << endl;
+    cout << "Сумма всех элементов массива: " << num1.n1_2(arr1, n) << endl;
+    cout << "Число " << "не содержится в массиве " << "содержится в массиве " << num1.n1_3(arr1, n, search_num) << endl;
 
-    num2();
+    vector<int> arr2 = { 1,4,5,6,8,7,6,5,9,4,10,12,14,27 };
+    int n2 = sizeof(arr2) / sizeof(arr2[0]);
+
+    cout << "Представлен следующий массив: ";
+
+    for (int num : arr2)
+    {
+        cout << num << ' ';
+    }
+
+    cout << endl;
+
+    cout << "Пузырьковая сортировка заняла " << bubbleSort(arr2, n2) << " наносекунд" << endl;
+    cout << "Сортировка выбором заняла " << choiceSort(arr2, n2) << " наносекунд" << endl;
 
     string str1[]
     {
@@ -153,7 +173,7 @@ int main()
 
     string str2 = "A man, a plan, a canal, Panama";
 
-    cout << "Второе по длине(лексикографически) слово: " << n3_1(str1, nstr) << endl;
+    cout << "Второе по длине(лексикографически) слово: " << n3_1_1(str1, nstr) << endl;
 
     return 0;
 }
