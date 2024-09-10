@@ -106,91 +106,109 @@ public:
     }
 };
 
-class n3_1
+class n3
 {
 public:
-    // O(n)
-    string n3_1_1(vector<string>& str)
+    class n3_1
     {
-        string maxStr = "";
-        string secondMax = "";
-
-        for (const auto& strin : str)
+    public:
+        // O(n)
+        string n3_1_1(vector<string>& str)
         {
-            if (strin > maxStr)
+            string maxStr = "";
+            string secondMax = "";
+
+            for (const auto& strin : str)
             {
-                secondMax = maxStr;
-                maxStr = strin;
-            }
-            else if (strin > secondMax && strin != maxStr)
-            {
-                secondMax = strin;
-            }
-        }
-
-        return secondMax;
-    }
-    // O(n log n)
-    string n3_1_2(vector<string>& str)
-    {
-        sort(str.begin(), str.end()); 
-
-        return str[str.size() - 2];
-    }
-};
-
-class n3_2
-{
-public:
-    // O(n)
-    bool n3_2_1(string& str)
-    {
-        string cleaned;
-
-        for (char ch : str)
-        {
-            if (isalpha(ch))
-            {
-                cleaned += tolower(ch);
-            }
-        }
-
-        string reversed = cleaned;
-
-        reverse(reversed.begin(), reversed.end());
-
-        return cleaned == reversed;
-    }
-    // O(n^2)
-    bool n3_2_2(string& str)
-    {
-        string cleared;
-
-        for (char ch : str)
-        {
-            if (isalpha(ch))
-            {
-                cleared += tolower(ch);
-            }
-        }
-
-        int n = cleared.length();
-
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < n - i - 1; j++)
-            {
-                if (cleared[i] != cleared[n - i - 1])
+                if (strin > maxStr)
                 {
-                    return false;
+                    secondMax = maxStr;
+                    maxStr = strin;
                 }
-                break;
+                else if (strin > secondMax && strin != maxStr)
+                {
+                    secondMax = strin;
+                }
             }
+
+            return secondMax;
         }
+        // O(n log n)
+        string n3_1_2(vector<string>& str)
+        {
+            sort(str.begin(), str.end()); 
+
+            return str[str.size() - 2];
+        }
+    };
+
+    class n3_2
+    {
+    public:
+        // O(n)
+        bool n3_2_1(string& str)
+        {
+            string cleaned;
+
+            for (char ch : str)
+            {
+                if (isalpha(ch))
+                {
+                    cleaned += tolower(ch);
+                }
+            }
+
+            string reversed = cleaned;
+
+            reverse(reversed.begin(), reversed.end());
+
+            return cleaned == reversed;
+        }
+        // O(n^2)
+        bool n3_2_2(string& str)
+        {
+            string cleared;
+
+            for (char ch : str)
+            {
+                if (isalpha(ch))
+                {
+                    cleared += tolower(ch);
+                }
+            }
+
+            int n = cleared.length();
+
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n - i - 1; j++)
+                {
+                    if (cleared[i] != cleared[n - i - 1])
+                    {
+                        return false;
+                    }
+                    break;
+                }
+            }
         
-        return true;
-    }
+            return true;
+        }
+    };
+
+    class n3_3
+    {
+    public:
+    };
+
+    class n3_4
+    {
+    public:
+    };
 };
+
+
+
+
 
 
 
@@ -248,14 +266,17 @@ int main()
         "date",
         "elderberry"
     };
-    n3_1 num3_1;
+    string str2 = "A man, a plan, a canal, Panama";
+
+    n3::n3_1 num3_1;
+    n3::n3_2 num3_2;
 
     cout << "\nВторое по длине(лексикографически) слово: " << num3_1.n3_1_1(str1) << endl;
 
-    string str2 = "A man, a plan, a canal, Panama";
-    n3_2 num3_2;
-
     cout << "\nСтрока \"" << str2 << "\"" << (num3_2.n3_2_2 (str2) ? " является палиндромом" : " не является палиндромом") << endl;
+
+    int arr3[] = { 1,2,3,4,4,5,6 };
+    int arr4[] = { -1,0,1,2,3,5 };
 
     return 0;
 }
