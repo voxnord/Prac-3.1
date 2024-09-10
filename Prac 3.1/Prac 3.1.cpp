@@ -3,20 +3,20 @@
 #include <vector>
 #include <Windows.h>
 #include <chrono>
+#include <algorithm>
+#include <cctype>
 
 using namespace std;
 
 class n1
 {
-private:
-    int i = 0;
 public:
     // O(n)
     int n1_1(int arr[], int n)
     {
         int Max = 0;
 
-        for (i; i < n; i++)
+        for (int i = 0; i < n; i++)
         {
             Max = max(Max, arr[i + 1]);
         }
@@ -28,7 +28,7 @@ public:
     {
         int sum = 0;
 
-        for (i; i < n; i++)
+        for (int i = 0; i < n; i++)
         {
             sum += arr[i];
         }
@@ -38,7 +38,7 @@ public:
     // O(n)
     bool n1_3(int arr[], int n, int search_num)
     {
-        for (i; i < n; i++)
+        for (int i = 0; i < n; i++)
         {
             if (arr[i] == search_num)
             {
@@ -52,11 +52,11 @@ public:
     }
 };
 
-class sorts
+class n2
 {
 public:
     // O(n^2)
-    auto bubbleSort(vector<int> arr, int n)
+    auto bubbleSort(vector<int>& arr, int n)
     {
         auto start_time = std::chrono::steady_clock::now();
 
@@ -79,7 +79,7 @@ public:
         return elapsed_s.count();
     }
     // O(n^2)
-    auto choiceSort(vector<int> arr, int n)
+    auto choiceSort(vector<int>& arr, int n)
     {
         auto start_time = std::chrono::steady_clock::now();
 
@@ -106,11 +106,164 @@ public:
     }
 };
 
-//O(n)
-string n3_1_1(string str[], int n)
+class n3_1
 {
-    string maxStr = "";
-    string secondMax = "";
+public:
+    // O(n)
+    string n3_1_1(vector<string>& str)
+    {
+        string maxStr = "";
+        string secondMax = "";
+
+        for (const auto& strin : str)
+        {
+            if (strin > maxStr)
+            {
+                secondMax = maxStr;
+                maxStr = strin;
+            }
+            else if (strin > secondMax && strin != maxStr)
+            {
+                secondMax = strin;
+            }
+        }
+
+        return secondMax;
+    }
+    // O(n log n)
+    string n3_1_2(vector<string>& str)
+    {
+        sort(str.begin(), str.end()); 
+
+        return str[str.size() - 2];
+    }
+};
+
+class n3_2
+{
+public:
+    // O(n)
+    bool n3_2_1(string& str)
+    {
+        string cleaned;
+
+        for (char ch : str)
+        {
+            if (isalpha(ch))
+            {
+                cleaned += tolower(ch);
+            }
+        }
+
+        string reversed = cleaned;
+
+        reverse(reversed.begin(), reversed.end());
+
+        return cleaned == reversed;
+    }
+    // O(n^2)
+    bool n3_2_2(string& str)
+    {
+        string cleared;
+
+        for (char ch : str)
+        {
+            if (isalpha(ch))
+            {
+                cleared += tolower(ch);
+            }
+        }
+
+        int n = cleared.length();
+
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n - i - 1; j++)
+            {
+                if (cleared[i] != cleared[n - i - 1])
+                {
+                    return false;
+                }
+                break;
+            }
+        }
+        
+        return true;
+    }
+};
+
+
+
+void n3_3_1()
+{
+
+}
+void n3_3_2()
+{
+
+}
+
+void n3_4_1()
+{
+
+}
+void n3_4_2()
+{
+
+}
+
+int main()
+{
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+
+    int arr1[] = { 7,9,6,5 };
+    int n = sizeof(arr1) / sizeof(arr1[0]);
+    int searchNum = 5;
+    n1 num1;
+
+    cout << "\nМаксимальный элемент в массиве: " << num1.n1_1(arr1, n) << endl;
+    cout << "\nСумма всех элементов массива: " << num1.n1_2(arr1, n) << endl;
+    cout << "\nЧисло " << searchNum << (num1.n1_3(arr1, n, searchNum) ? " содержится в массиве" : " не содержится в массиве") << endl;
+
+    vector<int> arr2 = { 1,4,5,6,8,7,6,5,9,4,10,12,14,27 };
+    int n_2 = sizeof(arr2) / sizeof(arr2[0]);
+
+    cout << "\nПредставлен следующий массив: ";
+
+    for (int num : arr2) { cout << num << ' '; } cout << endl;
+
+    n2 num2;
+
+    cout << "\nПузырьковая сортировка заняла " << num2.bubbleSort(arr2, n_2) << " наносекунд" << endl;
+    cout << "\nСортировка выбором заняла " << num2.choiceSort(arr2, n_2) << " наносекунд" << endl;
+    cout << (num2.bubbleSort(arr2, n_2) > num2.choiceSort(arr2, n_2) ? "\nСортировка выбором" : "\nПузырьковая сортировка") << " эффективнее, чем пузырьковая сортирвка" << endl;
+
+    vector<string> str1
+    {
+        "5",
+        "apple",
+        "banana",
+        "cherry",
+        "date",
+        "elderberry"
+    };
+    n3_1 num3_1;
+
+    cout << "\nВторое по длине(лексикографически) слово: " << num3_1.n3_1_1(str1) << endl;
+
+    string str2 = "A man, a plan, a canal, Panama";
+    n3_2 num3_2;
+
+    cout << "\nСтрока \"" << str2 << "\"" << (num3_2.n3_2_2 (str2) ? " является палиндромом" : " не является палиндромом") << endl;
+
+    return 0;
+}
+
+/*string n3_1_1(vector<string> str, int n)
+{
+    vector<string> maxStr = { "" };
+    vector<string> secondMax = { "" };
 
     for (int i = 0; i < n; i++)
     {
@@ -126,72 +279,4 @@ string n3_1_1(string str[], int n)
     }
 
     return secondMax;
-}
-
-string n3_1_2(string str[], int n)
-{
-
-}
-
-void n3_2()
-{
-
-}
-
-int main()
-{
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);
-
-    int arr1[] = { 7,9,6,5 };
-    int n = sizeof(arr1) / sizeof(arr1[0]);
-    int search_num = 5;
-    n1 num1;
-
-    cout << "Максимальный элемент в массиве: " << num1.n1_1(arr1, n) << endl;
-    cout << "Сумма всех элементов массива: " << num1.n1_2(arr1, n) << endl;
-    cout << "Число " << "не содержится в массиве " << "содержится в массиве " << num1.n1_3(arr1, n, search_num) << endl;
-
-    vector<int> arr2 = { 1,4,5,6,8,7,6,5,9,4,10,12,14,27 };
-    int n2 = sizeof(arr2) / sizeof(arr2[0]);
-
-    cout << "Представлен следующий массив: ";
-
-    for (int num : arr2)
-    {
-        cout << num << ' ';
-    }
-
-    cout << endl;
-
-    sorts num2;
-
-    cout << "Пузырьковая сортировка заняла " << num2.bubbleSort(arr2, n2) << " наносекунд" << endl;
-    cout << "Сортировка выбором заняла " << num2.choiceSort(arr2, n2) << " наносекунд" << endl;
-
-    if (num2.bubbleSort(arr2, n2) > num2.choiceSort(arr2, n2))
-    {
-        cout << "Сортировка вставками эффективнее, чем пузырьковая сортирвка" << endl;
-    }
-    else if (num2.bubbleSort(arr2, n2) < num2.choiceSort(arr2, n2))
-    {
-        cout << "Пузырьковая сортировка эффективнее, чем сортирвка вставками" << endl;
-    }
-
-    string str1[]
-    {
-        "5",
-        "apple",
-        "banana",
-        "cherry",
-        "date",
-        "elderberry"
-    };
-    int nstr = sizeof(str1) / sizeof(str1[0]);
-
-    string str2 = "A man, a plan, a canal, Panama";
-
-    cout << "Второе по длине(лексикографически) слово: " << n3_1_1(str1, nstr) << endl;
-
-    return 0;
-}
+}*/
