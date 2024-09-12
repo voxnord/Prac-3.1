@@ -2,9 +2,9 @@
 #include <string>
 #include <vector>
 #include <Windows.h>
-#include <chrono>
-#include <algorithm>
-#include <cctype>
+#include <chrono> // chrono::steady_clock::now | chrono::duration_cast<chrono::nanoseconds>
+#include <algorithm> // sort | reverse
+#include <cctype> // isalpha() | tolower()
 
 using namespace std;
 
