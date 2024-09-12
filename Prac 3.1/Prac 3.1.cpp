@@ -198,37 +198,99 @@ public:
     class n3_3
     {
     public:
+        // O(n^2)
+        int n3_3_1(vector<int> arr)
+        {
+            int unique_count = 0;
+            bool unique;
+
+            for (int i = 0; i < arr.size(); i++)
+            {
+                unique = true;
+
+                for (int j = 0; j < arr.size(); j++)
+                {
+                    if (i != j && arr[i] == arr[j])
+                    {
+                        unique = false;
+                        break;
+                    }
+                }
+
+                if (unique)
+                {
+                    unique_count++;
+                }
+            }
+
+            return unique_count;
+        }
+        // O(n)
+        int n3_3_2(vector<int> arr)
+        {
+            int unique_count = 0;
+            const int ASCI_SIZE = 256;
+            int freq[ASCI_SIZE] = { 0 };
+
+            for (int i = 0; i < arr.size(); i++)
+            {
+                freq[arr[i]]++;
+            }
+
+            for (int i = 0; i < arr.size(); i++)
+            {
+                if (freq[arr[i]] == 1)
+                {
+                    unique_count++;
+                }
+            }
+
+            return unique_count;
+        }
     };
 
     class n3_4
     {
     public:
+        // O(n)
+        int n3_4_1(vector<int>& arr)
+        {
+            for (int i = 0; i < arr.size(); i++)
+            {
+                while (arr[i] > 0 && arr[i] <= arr.size() && arr[arr[i] - 1] != arr[i])
+                {
+                    swap(arr[i], arr[arr[i] - 1]);
+                }
+            }
+
+            for (int i = 0; i < arr.size(); i++)
+            {
+                if (arr[i] != i + 1)
+                {
+                    return i + 1;
+                }
+            }
+
+            return arr.size() + 1;
+        }
+        // O(n log n)
+        int n3_4_2(vector<int> arr)
+        {
+            int smallest = 1;
+            sort(arr.begin(), arr.end());
+
+            for (int num : arr)
+            {
+                if (num == smallest)
+                {
+                    smallest++;
+                }
+            }
+
+            return smallest;
+        }
     };
 };
-
-
-
-
-
-
-
-void n3_3_1()
-{
-
-}
-void n3_3_2()
-{
-
-}
-
-void n3_4_1()
-{
-
-}
-void n3_4_2()
-{
-
-}
 
 int main()
 {
@@ -236,13 +298,13 @@ int main()
     SetConsoleOutputCP(1251);
 
     int arr1[] = { 7,9,6,5 };
-    int n = sizeof(arr1) / sizeof(arr1[0]);
+    int n_1 = sizeof(arr1) / sizeof(arr1[0]);
     int searchNum = 5;
     n1 num1;
 
-    cout << "\nМаксимальный элемент в массиве: " << num1.n1_1(arr1, n) << endl;
-    cout << "\nСумма всех элементов массива: " << num1.n1_2(arr1, n) << endl;
-    cout << "\nЧисло " << searchNum << (num1.n1_3(arr1, n, searchNum) ? " содержится в массиве" : " не содержится в массиве") << endl;
+    cout << "\nМаксимальный элемент в массиве: " << num1.n1_1(arr1, n_1) << endl;
+    cout << "\nСумма всех элементов массива: " << num1.n1_2(arr1, n_1) << endl;
+    cout << "\nЧисло " << searchNum << (num1.n1_3(arr1, n_1, searchNum) ? " содержится в массиве" : " не содержится в массиве") << endl;
 
     vector<int> arr2 = { 1,4,5,6,8,7,6,5,9,4,10,12,14,27 };
     int n_2 = sizeof(arr2) / sizeof(arr2[0]);
@@ -267,16 +329,20 @@ int main()
         "elderberry"
     };
     string str2 = "A man, a plan, a canal, Panama";
-
+    vector<int> arr3 = { 6,1,2,3,4,4,5 };
+    vector<int> arr4 = { 5,1,2,0,-1,3 };
     n3::n3_1 num3_1;
     n3::n3_2 num3_2;
+    n3::n3_3 num3_3;
+    n3::n3_4 num3_4;
 
     cout << "\nВторое по длине(лексикографически) слово: " << num3_1.n3_1_1(str1) << endl;
 
-    cout << "\nСтрока \"" << str2 << "\"" << (num3_2.n3_2_2 (str2) ? " является палиндромом" : " не является палиндромом") << endl;
+    cout << "\nСтрока \"" << str2 << "\"" << (num3_2.n3_2_1 (str2) ? " является палиндромом" : " не является палиндромом") << endl;
 
-    int arr3[] = { 1,2,3,4,4,5,6 };
-    int arr4[] = { -1,0,1,2,3,5 };
+    cout << "\nКоличество уникальных элементов в массиве: " << num3_3.n3_3_1(arr3) << endl;
+
+    cout << "\nНаименьшее отсутсвующее число: " << num3_4.n3_4_1(arr4) << endl;
 
     return 0;
 }
