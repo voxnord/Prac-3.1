@@ -294,8 +294,8 @@ public:
 
 int main()
 {
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);
+    SetConsoleCP(65001);
+    SetConsoleOutputCP(65001);
 
     int arr1[] = { 7,9,6,5 };
     int n_1 = sizeof(arr1) / sizeof(arr1[0]);
